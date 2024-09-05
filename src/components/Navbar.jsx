@@ -17,10 +17,10 @@ const Navbar = () => {
         <>
             <nav className="w-full border-b border-gray-200 py-2">
                 <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-                    <a href="" className="flex items-center space-x-1">
+                    <Link href="" className="flex items-center space-x-1">
                         <img src="/src/assets/img/logo.png" className="h-10" alt="Logo" />
                         <h4 className="self-center text-2xl font-bold whitespace-nowrap">Furni<span className="text-[#1E99F5]">Flex</span></h4>
-                    </a>
+                    </Link>
                     <div className="flex items-center md:order-2 space-x-4">
 
                         <div className="relative">
