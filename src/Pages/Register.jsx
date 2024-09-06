@@ -8,11 +8,11 @@ import { FaApple } from "react-icons/fa";
 const Register = () => {
     return (
         <>
-            <div className="max-w-screen-xl flex flex-col md:flex-row items-center justify-between mx-auto p-4">
+            <div className="max-w-screen-xl flex flex-col md:flex-row items-center justify-between mx-auto px-4">
 
 
-                <div className="flex items-center w-full">
-                    <form className="flex flex-col w-full h-full pb-6 text-center bg-gray-100 rounded-xl p-12">
+                <div className="flex items-center w-full md:w-1/2 md:p-24">
+                    <form className="flex flex-col w-full h-full pb-6 text-center bg-gray-200 rounded-xl p-8">
                         <h3 className="mb-3 text-2xl font-extrabold text-dark-grey-900">Welcome to</h3>
                         <Link href="" className="text-center space-x-1">
                             <h4 className="text-6xl font-bold whitespace-nowrap text-center">Furni<span className="text-[#1E99F5]">Flex</span></h4>
@@ -74,7 +74,7 @@ const Register = () => {
 
                         </div>
                         <button className="w-full px-6 py-5 mb-5 text-sm font-bold text-white rounded-lg hover:bg-purple-blue-600 focus:ring-4 focus:ring-purple-blue-100 bg-gray-800">
-                            SIGN UP
+                            Sign Up
                         </button>
 
 
@@ -86,33 +86,33 @@ const Register = () => {
 
                         <div className="flex space-x-4 mb-6">
                             <a
-                                className="flex items-center justify-center w-full py-3 border-2 border-gray-300 rounded text-lg hover:bg-white"
+                                className="flex items-center justify-center w-full py-3 border-2 border-gray-300 rounded text-sm hover:bg-white"
                                 href="#"
                             >
-                                <FcGoogle className="text-3xl mr-2" />
+                                <FcGoogle className="text-2xl mr-2" />
                                 Sign in with Google
                             </a>
                             <a
-                                className="flex items-center justify-center w-full py-3 border-2 border-gray-300 rounded text-lg hover:bg-white"
+                                className="flex items-center justify-center w-full py-3 border-2 border-gray-300 rounded text-sm hover:bg-white"
                                 href="#"
                             >
-                                <FaApple className="text-3xl mr-2" />
+                                <FaApple className="text-2xl mr-2" />
                                 Sign in with Apple
                             </a>
                         </div>
 
                         <p className="text-md leading-relaxed text-grey-900">
                             Have an account?{' '}
-                            <a href="#" className="font-bold text-blue-700 hover:text-gray-800">
+                            <Link to="/user/login" className="font-bold text-blue-700 hover:text-gray-800">
                                 Sign In
-                            </a>
+                            </Link>
                         </p>
 
                     </form>
                 </div>
 
                 <div
-                    className="w-full h-[120vh] bg-cover bg-center"
+                    className="w-full h-[148vh] bg-cover bg-center"
                     style={{ backgroundImage: `url('/src/assets/img/chris-lee-70l1tDAI6rM-unsplash 1.png')` }}
                 >
                     <div className="flex flex-col items-center justify-center h-full p-6 text-center">
