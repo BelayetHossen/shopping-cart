@@ -1,20 +1,36 @@
 import { Link } from "react-router-dom";
 import { PiHandbagSimpleBold } from "react-icons/pi";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { AuthContext } from "../context/ContextProvider";
 
 
 
 
 const Navbar = () => {
-
-
+    const { user, logOut } = useContext(AuthContext);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const [isOpen, setIsOpen] = useState(false);
 
     const toggleMenu = () => {
         setIsMenuOpen(!isMenuOpen);
     };
+    const toggleDropdown = () => {
+        setIsOpen(!isOpen);
+    };
+
+    const handleLogout = () => {
+        logOut()
+            .then(result => { })
+            .catch(error => console.error(error));
+    }
+
+
+
+
     return (
         <>
+
+
             <nav className="w-full border-b border-gray-200 py-2">
                 <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
                     <Link href="" className="flex items-center space-x-1">
@@ -27,13 +43,31 @@ const Navbar = () => {
                             <PiHandbagSimpleBold className="text-4xl" />
                             <div className="absolute inline-flex items-center justify-center w-4 h-4 text-xs font-bold text-white bg-gray-800 border-1 border-black rounded-full -bottom-0 -end-0 dark:border-gray-900">2</div>
                         </div>
-                        <img className="w-10 h-10 rounded-full" src="/src/assets/img/logo.png" alt="Rounded avatar"></img>
-                        <Link
-                            to="/user/register"
-                            className="text-white bg-[#1E99F5] hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center"
-                        >
-                            Login/Register
-                        </Link>
+                        {
+                            user &&
+                            <div className="relative inline-block text-left">
+                                <button onClick={toggleDropdown}>{user?.email}</button>
+
+                                {isOpen && (
+                                    <div className="absolute left-0 mt-2 w-48 bg-white rounded-md shadow-lg">
+                                        <ul className="py-1">
+                                            <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer" onClick={handleLogout}>
+                                                Logout
+                                            </li>
+                                        </ul>
+                                    </div>
+                                )}
+                            </div>
+                        }
+                        {
+                            !user &&
+                            <Link
+                                to="/user/register"
+                                className="text-white bg-[#1E99F5] hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center"
+                            >
+                                Login/Register
+                            </Link>
+                        }
                         <button
                             onClick={toggleMenu}
                             type="button"
@@ -113,7 +147,7 @@ const Navbar = () => {
                         </ul>
                     </div>
                 </div>
-            </nav>
+            </nav >
 
 
 

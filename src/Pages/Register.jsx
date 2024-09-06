@@ -1,18 +1,86 @@
-import { Link } from "react-router-dom";
-import { FcGoogle } from "react-icons/fc";
-import { FaApple } from "react-icons/fa";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import { AuthContext } from "../context/ContextProvider";
+import Social from "../components/Social";
+import { toast, ToastContainer } from "react-toastify";
 
 
 
 
 const Register = () => {
+    const { userFullName, createUser } = useContext(AuthContext);
+
+
+    const navigate = useNavigate();
+    const location = useLocation();
+    const from = location.state?.from?.pathname || '/';
+
+    const submitRegister = (e) => {
+        e.preventDefault();
+        const form = e.target;
+        const fname = form.fname.value;
+        const lname = form.lname.value;
+        const email = form.email.value;
+        const password = form.password.value;
+
+        console.log(fname, lname, email, password);
+
+        function checkPassword(str) {
+            const passValRegEx = /^[a-zA-Z0-9!@#$%^&*]{6,16}$/;
+            return passValRegEx.test(str);
+        }
+        if (!checkPassword(password)) {
+            toast.error("Password must be 8 caracters and numeric and special carecters mix")
+        }
+
+
+
+        if (email === '') {
+            toast.error("The email field is requrired!")
+        }
+        if (password === '') {
+            toast.error("The password field is requrired!")
+        }
+
+
+        if (email != '' && password != '' && checkPassword) {
+            createUser(email, password)
+                .then(result => {
+                    const registeredUser = result.user;
+                    update(registeredUser, fname, lname);
+                    form.reset();
+                    setTimeout(function () {
+                        navigate(from, { replace: true })
+                    }, 3000);
+
+                })
+                .catch(error => {
+                    console.log(error);
+                })
+        }
+
+
+    }
+
+    const update = (registeredUser, fname, lname) => {
+        userFullName(registeredUser, fname, lname)
+            .then(() => {
+                toast.success("User registered successfully! Redirecting.....")
+
+            })
+            .catch(error => {
+                console.log(error);
+            })
+    }
+
+
     return (
         <>
             <div className="max-w-screen-xl flex flex-col md:flex-row items-center justify-between mx-auto px-4">
-
+                <ToastContainer />
 
                 <div className="flex items-center w-full md:w-1/2 md:p-24">
-                    <form className="flex flex-col w-full h-full pb-6 text-center bg-gray-200 rounded-xl p-8">
+                    <form onSubmit={submitRegister} className="flex flex-col w-full h-full pb-6 text-center bg-gray-200 rounded-xl p-8">
                         <h3 className="mb-3 text-2xl font-extrabold text-dark-grey-900">Welcome to</h3>
                         <Link href="" className="text-center space-x-1">
                             <h4 className="text-6xl font-bold whitespace-nowrap text-center">Furni<span className="text-[#1E99F5]">Flex</span></h4>
@@ -26,6 +94,7 @@ const Register = () => {
                                 </label>
                                 <input
                                     id="fname"
+                                    name="fname"
                                     type="text"
                                     className="p-3"
                                 />
@@ -36,6 +105,7 @@ const Register = () => {
                                 </label>
                                 <input
                                     id="lname"
+                                    name="lname"
                                     type="text"
                                     className="p-3"
                                 />
@@ -49,6 +119,7 @@ const Register = () => {
                             </label>
                             <input
                                 id="email"
+                                name="email"
                                 type="email"
                                 className="p-3"
                             />
@@ -60,6 +131,7 @@ const Register = () => {
                             </label>
                             <input
                                 id="password"
+                                name="password"
                                 type="password"
                                 className="p-3"
                             />
@@ -84,22 +156,7 @@ const Register = () => {
                             <hr className="h-0 border-b border-solid border-grey-500 grow" />
                         </div>
 
-                        <div className="flex space-x-4 mb-6">
-                            <a
-                                className="flex items-center justify-center w-full py-3 border-2 border-gray-300 rounded text-sm hover:bg-white"
-                                href="#"
-                            >
-                                <FcGoogle className="text-2xl mr-2" />
-                                Sign in with Google
-                            </a>
-                            <a
-                                className="flex items-center justify-center w-full py-3 border-2 border-gray-300 rounded text-sm hover:bg-white"
-                                href="#"
-                            >
-                                <FaApple className="text-2xl mr-2" />
-                                Sign in with Apple
-                            </a>
-                        </div>
+                        <Social />
 
                         <p className="text-md leading-relaxed text-grey-900">
                             Have an account?{' '}
@@ -112,7 +169,7 @@ const Register = () => {
                 </div>
 
                 <div
-                    className="w-full h-[148vh] bg-cover bg-center"
+                    className="w-full h-[140vh] bg-cover bg-center"
                     style={{ backgroundImage: `url('/src/assets/img/chris-lee-70l1tDAI6rM-unsplash 1.png')` }}
                 >
                     <div className="flex flex-col items-center justify-center h-full p-6 text-center">
