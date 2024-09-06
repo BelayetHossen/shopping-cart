@@ -28,12 +28,12 @@ const Navbar = () => {
                             <div className="absolute inline-flex items-center justify-center w-4 h-4 text-xs font-bold text-white bg-gray-800 border-1 border-black rounded-full -bottom-0 -end-0 dark:border-gray-900">2</div>
                         </div>
                         <img className="w-10 h-10 rounded-full" src="/src/assets/img/logo.png" alt="Rounded avatar"></img>
-                        <button
-                            type="button"
+                        <Link
+                            to="/user/register"
                             className="text-white bg-[#1E99F5] hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center"
                         >
                             Login/Register
-                        </button>
+                        </Link>
                         <button
                             onClick={toggleMenu}
                             type="button"

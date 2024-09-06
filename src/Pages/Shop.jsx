@@ -63,7 +63,7 @@ const Shop = () => {
                                         <img className="p-4 rounded-t-lg bg-gray-100 w-full" src={product.photo} alt="product image" />
                                         <div className="px-5 pb-5">
                                             <a href="#">
-                                                <h5 className="text-lg font-semibold tracking-tight text-gray-900">
+                                                <h5 className="text-lg font-semibold tracking-tight text-gray-900 mt-4">
                                                     {product.title}
                                                 </h5>
                                             </a>
@@ -71,14 +71,14 @@ const Shop = () => {
                                                 <div className="flex items-center">
                                                     <div className="flex items-center">
                                                         <MdEuro />
-                                                        <h6 className="me-3">600</h6>
+                                                        <h6 className="me-3">{product.selling_price}</h6>
                                                     </div>
-                                                    <div className="flex items-center text-gray-300">
+                                                    <div className="flex items-center text-gray-500">
                                                         <MdEuro />
-                                                        <del className="">500</del>
+                                                        <del className="">{product.price}</del>
                                                     </div>
                                                 </div>
-                                                <h6>30% OFF</h6>
+                                                <h6 className="text-red-500">{Math.ceil(((product.price - product.selling_price) / product.price) * 100)}% OFF</h6>
 
                                             </div>
                                             <div className="mb-6 text-gray-400">
