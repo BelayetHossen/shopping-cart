@@ -4,8 +4,9 @@ import 'react-toastify/dist/ReactToastify.css';
 const AuthLayout = () => {
     return (
         <>
-
             <Outlet />
+
+
         </>
     );
 };

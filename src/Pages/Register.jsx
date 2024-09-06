@@ -3,12 +3,13 @@ import { useContext } from "react";
 import { AuthContext } from "../context/ContextProvider";
 import Social from "../components/Social";
 import { toast, ToastContainer } from "react-toastify";
+import Loader from "../components/Loader";
 
 
 
 
 const Register = () => {
-    const { userFullName, createUser } = useContext(AuthContext);
+    const { userFullName, createUser, setLoading, loading } = useContext(AuthContext);
 
 
     const navigate = useNavigate();
@@ -17,13 +18,13 @@ const Register = () => {
 
     const submitRegister = (e) => {
         e.preventDefault();
+        setLoading(true);
         const form = e.target;
         const fname = form.fname.value;
         const lname = form.lname.value;
         const email = form.email.value;
         const password = form.password.value;
 
-        console.log(fname, lname, email, password);
 
         function checkPassword(str) {
             const passValRegEx = /^[a-zA-Z0-9!@#$%^&*]{6,16}$/;
@@ -31,15 +32,18 @@ const Register = () => {
         }
         if (!checkPassword(password)) {
             toast.error("Password must be 8 caracters and numeric and special carecters mix")
+            setLoading(false);
         }
 
 
 
         if (email === '') {
             toast.error("The email field is requrired!")
+            setLoading(false);
         }
         if (password === '') {
             toast.error("The password field is requrired!")
+            setLoading(false);
         }
 
 
@@ -51,11 +55,13 @@ const Register = () => {
                     form.reset();
                     setTimeout(function () {
                         navigate(from, { replace: true })
+                        setLoading(false);
                     }, 3000);
 
                 })
                 .catch(error => {
                     console.log(error);
+                    setLoading(false);
                 })
         }
 
@@ -66,16 +72,20 @@ const Register = () => {
         userFullName(registeredUser, fname, lname)
             .then(() => {
                 toast.success("User registered successfully! Redirecting.....")
-
+                setLoading(false);
             })
             .catch(error => {
                 console.log(error);
+                setLoading(false);
             })
     }
 
 
     return (
         <>
+            {
+                loading && <Loader />
+            }
             <div className="max-w-screen-xl flex flex-col md:flex-row items-center justify-between mx-auto px-4">
                 <ToastContainer />
 

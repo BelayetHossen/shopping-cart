@@ -6,7 +6,7 @@ import { AuthContext } from "../context/ContextProvider";
 import { useLocation, useNavigate } from "react-router-dom";
 
 const Social = () => {
-    const { googleSignIn } = useContext(AuthContext);
+    const { googleSignIn, setLoading } = useContext(AuthContext);
     const navigate = useNavigate();
     const location = useLocation();
     const from = location.state?.from?.pathname || '/';
@@ -16,12 +16,12 @@ const Social = () => {
 
         googleSignIn()
             .then(result => {
-                const loggedUser = result.user;
-                console.log(loggedUser)
                 navigate(from, { replace: true })
+                setLoading(false);
             })
             .catch(error => {
                 console.log(error);
+                setLoading(false);
             })
     }
     return (

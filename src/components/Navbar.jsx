@@ -7,7 +7,7 @@ import { AuthContext } from "../context/ContextProvider";
 
 
 const Navbar = () => {
-    const { user, logOut } = useContext(AuthContext);
+    const { user, logOut, setLoading, loading } = useContext(AuthContext);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [isOpen, setIsOpen] = useState(false);
 
@@ -19,9 +19,11 @@ const Navbar = () => {
     };
 
     const handleLogout = () => {
+        setLoading(true);
         logOut()
             .then(result => { })
             .catch(error => console.error(error));
+        setLoading(false);
     }
 
 

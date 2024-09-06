@@ -1,5 +1,5 @@
 
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useRef, useState } from "react";
 import app from "../firebase/firebase.config";
 import {
     GoogleAuthProvider,
@@ -11,6 +11,7 @@ import {
     signOut,
     updateProfile,
 } from "firebase/auth";
+import { toast } from "react-toastify";
 export const AuthContext = createContext();
 const auth = getAuth(app);
 
@@ -40,10 +41,46 @@ const ContextProvider = ({ children }) => {
         return signInWithPopup(auth, googleProvider);
     };
 
+
+
+    const timeoutRef = useRef(null);
+
+    // Function to log out the user
     const logOut = () => {
         setLoading(true);
+        toast.success("User logout successfully!")
         return signOut(auth);
     };
+
+    // Function to reset the inactivity timer
+    const resetInactivityTimer = () => {
+        if (timeoutRef.current) {
+            clearTimeout(timeoutRef.current);
+        }
+
+        timeoutRef.current = setTimeout(() => {
+            logOut();
+        }, 60000); // 60 s
+    };
+
+    useEffect(() => {
+        const handleUserActivity = () => {
+            resetInactivityTimer();
+        };
+
+        window.addEventListener("mousemove", handleUserActivity);
+        window.addEventListener("keypress", handleUserActivity);
+        resetInactivityTimer();
+        return () => {
+            if (timeoutRef.current) {
+                setLoading(true);
+                clearTimeout(timeoutRef.current);
+                setLoading(false);
+            }
+            window.removeEventListener("mousemove", handleUserActivity);
+            window.removeEventListener("keypress", handleUserActivity);
+        };
+    }, []);
 
     // observer user auth state
     useEffect(() => {

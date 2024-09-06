@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { MdEuro } from "react-icons/md";
+import { ToastContainer } from "react-toastify";
 
 
 
@@ -21,6 +22,7 @@ const Shop = () => {
 
     return (
         <>
+            <ToastContainer />
             <div className="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8">
                 <div className="flex flex-col md:flex-row space-x-10 my-6 w-full">
                     <ul className="flex-column space-y-2 text-sm font-medium text-gray-500 md:me-4 mb-4 md:mb-0 pe-4 border-e w-full md:w-1/4">
