@@ -1,0 +1,50 @@
+[
+    {
+        "id": 1,
+        "title": "Ergonomic Office Chair",
+        "price": 300,
+        "selling_price": 250,
+        "photo": "/src/assets/img/image 1.png",
+        "short_description": "Comfortable ergonomic chair with lumbar support, perfect."
+    },
+    {
+        "id": 2,
+        "title": "Executive Leather Chair",
+        "price": 500,
+        "selling_price": 450,
+        "photo": "/src/assets/img/image 2.png",
+        "short_description": "Luxurious leather executive chair with adjustable height."
+    },
+    {
+        "id": 3,
+        "title": "Mesh Task Chair",
+        "price": 150,
+        "selling_price": 120,
+        "photo": "/src/assets/img/image 3.png",
+        "short_description": "Breathable mesh task chair with adjustable armrests and back."
+    },
+    {
+        "id": 4,
+        "title": "Gaming Chair",
+        "price": 350,
+        "selling_price": 300,
+        "photo": "/src/assets/img/image 4.png",
+        "short_description": "Stylish gaming chair with recline function and headrest for long."
+    },
+    {
+        "id": 5,
+        "title": "Wooden Dining Chair",
+        "price": 120,
+        "selling_price": 100,
+        "photo": "/src/assets/img/image 5.png",
+        "short_description": "Classic wooden dining chair with comfortable cushion seating."
+    },
+    {
+        "id": 6,
+        "title": "Recliner Chair",
+        "price": 600,
+        "selling_price": 550,
+        "photo": "/src/assets/img/image 6.png",
+        "short_description": "Luxury recliner chair with smooth fabric and full reclining."
+    }
+]
