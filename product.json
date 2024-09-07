@@ -5,7 +5,8 @@
         "price": 300,
         "selling_price": 250,
         "photo": "/src/assets/img/image 1.png",
-        "short_description": "Comfortable ergonomic chair with lumbar support, perfect."
+        "short_description": "Comfortable ergonomic chair with lumbar support, perfect.",
+        "quantity": 1
     },
     {
         "id": 2,
@@ -13,7 +14,8 @@
         "price": 500,
         "selling_price": 450,
         "photo": "/src/assets/img/image 2.png",
-        "short_description": "Luxurious leather executive chair with adjustable height."
+        "short_description": "Luxurious leather executive chair with adjustable height.",
+        "quantity": 1
     },
     {
         "id": 3,
@@ -21,7 +23,8 @@
         "price": 150,
         "selling_price": 120,
         "photo": "/src/assets/img/image 3.png",
-        "short_description": "Breathable mesh task chair with adjustable armrests and back."
+        "short_description": "Breathable mesh task chair with adjustable armrests and back.",
+        "quantity": 1
     },
     {
         "id": 4,
@@ -29,7 +32,8 @@
         "price": 350,
         "selling_price": 300,
         "photo": "/src/assets/img/image 4.png",
-        "short_description": "Stylish gaming chair with recline function and headrest for long."
+        "short_description": "Stylish gaming chair with recline function and headrest for long.",
+        "quantity": 1
     },
     {
         "id": 5,
@@ -37,7 +41,8 @@
         "price": 120,
         "selling_price": 100,
         "photo": "/src/assets/img/image 5.png",
-        "short_description": "Classic wooden dining chair with comfortable cushion seating."
+        "short_description": "Classic wooden dining chair with comfortable cushion seating.",
+        "quantity": 1
     },
     {
         "id": 6,
@@ -45,6 +50,7 @@
         "price": 600,
         "selling_price": 550,
         "photo": "/src/assets/img/image 6.png",
-        "short_description": "Luxury recliner chair with smooth fabric and full reclining."
+        "short_description": "Luxury recliner chair with smooth fabric and full reclining.",
+        "quantity": 1
     }
 ]

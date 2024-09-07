@@ -1,4 +1,7 @@
 
+export const subTotal = (cart) => {
+    return cart.reduce((total, product) => total + product.quantity * product.selling_price, 0);
+}
 
 const CartReducer = (state, action) => {
     switch (action.type) {
@@ -10,8 +13,11 @@ const CartReducer = (state, action) => {
 
         case "Increase":
             return state.map(product =>
-                product.id === action.id ? { ...product, quantity: product.quantity + 1 } : product
+                product.id === action.id && product.quantity < 10
+                    ? { ...product, quantity: product.quantity + 1 }
+                    : product
             );
+
 
         case "Decrease":
             return state.map(product =>

@@ -1,23 +1,40 @@
 import { useContext } from "react";
 import { AuthContext } from "../context/ContextProvider";
 import { FaTimes } from "react-icons/fa";
-import { MdEuro } from "react-icons/md";
+import { toast, ToastContainer } from "react-toastify";
+import Loader from "../components/Loader";
+import { subTotal } from "../featurs/CartReducer";
 
 
 
 const Cart = () => {
-    const { user, logOut, setLoading, cart } = useContext(AuthContext);
+    const { dispatch, loading, setLoading, cart } = useContext(AuthContext);
 
 
-    // const navigate = useNavigate();
-    // if (!user) {
-    //     navigate("/user/login", { state: { from: "/cart" }, replace: true });
-    // } else {
-    //     navigate("/cart");
-    // }
+    // increase
+    const increase = (id) => {
+        dispatch({ type: "Increase", id });
+    };
+
+    // decrease
+    const decrease = (id) => {
+        dispatch({ type: "Decrease", id });
+    }
+
+    // Remove system
+    const removeCart = (id) => {
+        setLoading(true);
+        dispatch({ type: "Remove", id });
+        toast.success("Remove from cart successfully!");
+        setLoading(false);
+    };
 
     return (
         <>
+            {
+                loading && <Loader />
+            }
+            <ToastContainer />
             <div className="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8">
                 <div className="md:flex md:space-x-10">
                     <div className="w-full md:w-3/4 mb-5">
@@ -44,9 +61,9 @@ const Cart = () => {
                                             <div>
                                                 <div className="flex items-center">
                                                     <div className="border border-gray-400 rounded">
-                                                        <button className="px-2 py-1 text-2xl">-</button>
-                                                        <span className="px-2 py-1 text-2xl">1</span>
-                                                        <button className="px-2 py-1 text-2xl">+</button>
+                                                        <button onClick={() => decrease(product.id)} className="px-2 py-1 text-2xl">-</button>
+                                                        <span className="px-2 py-1 text-2xl">{product.quantity}</span>
+                                                        <button onClick={() => increase(product.id)} className="px-2 py-1 text-2xl">+</button>
                                                     </div>
                                                     <div className="flex ms-2">
                                                         <img className="w-20 h-20 bg-gray-200 p-2 rounded" src={product.photo} alt="" />
@@ -56,7 +73,7 @@ const Cart = () => {
 
                                             </div>
                                             <div>
-                                                <button><FaTimes className="text-gray-500" /></button>
+                                                <button onClick={() => removeCart(product.id)}><FaTimes className="text-gray-500" /></button>
                                             </div>
                                         </div>
                                         <div className="text-end font-bold">
@@ -78,7 +95,7 @@ const Cart = () => {
                         <div className="bg-gray-100 border border-gray-400 p-4 rounded">
                             <div className="flex justify-between text-gray-600">
                                 <div>Subtotal</div>
-                                <div>€1500.00</div>
+                                <div>€{subTotal(cart)}.00</div>
                             </div>
                             <div className="flex justify-between py-1 text-gray-600">
                                 <div>Shipping</div>
@@ -91,7 +108,7 @@ const Cart = () => {
                             <hr className="my-5" />
                             <div className="flex justify-between text-lg font-bold">
                                 <div>Total</div>
-                                <div>€1500.00</div>
+                                <div>€{subTotal(cart)}.00</div>
                             </div>
                         </div>
                         <button className="bg-gray-800 rounded text-white w-full py-2 mt-4">Go to Checkout</button>
