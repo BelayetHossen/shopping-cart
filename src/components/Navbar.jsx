@@ -43,10 +43,10 @@ const Navbar = () => {
                     </Link>
                     <div className="flex items-center md:order-2 space-x-4">
 
-                        <div className="relative">
+                        <Link to={'/cart'} className="relative">
                             <PiHandbagSimpleBold className="text-4xl" />
                             <div className="absolute inline-flex items-center justify-center w-4 h-4 text-xs font-bold text-white bg-gray-800 border-1 border-black rounded-full -bottom-0 -end-0 dark:border-gray-900">{cart.length}</div>
-                        </div>
+                        </Link>
                         {
                             user &&
                             <div className="relative inline-block text-left">
