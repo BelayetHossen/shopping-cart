@@ -7,17 +7,19 @@ import { AuthContext } from "../context/ContextProvider";
 
 
 const Navbar = () => {
-    const { user, logOut, setLoading, loading } = useContext(AuthContext);
+    const { user, logOut, setLoading, cart } = useContext(AuthContext);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [isOpen, setIsOpen] = useState(false);
 
+    // mobile menu
     const toggleMenu = () => {
         setIsMenuOpen(!isMenuOpen);
     };
+    //profile dropdown
     const toggleDropdown = () => {
         setIsOpen(!isOpen);
     };
-
+    // logout system
     const handleLogout = () => {
         setLoading(true);
         logOut()
@@ -43,7 +45,7 @@ const Navbar = () => {
 
                         <div className="relative">
                             <PiHandbagSimpleBold className="text-4xl" />
-                            <div className="absolute inline-flex items-center justify-center w-4 h-4 text-xs font-bold text-white bg-gray-800 border-1 border-black rounded-full -bottom-0 -end-0 dark:border-gray-900">2</div>
+                            <div className="absolute inline-flex items-center justify-center w-4 h-4 text-xs font-bold text-white bg-gray-800 border-1 border-black rounded-full -bottom-0 -end-0 dark:border-gray-900">{cart.length}</div>
                         </div>
                         {
                             user &&

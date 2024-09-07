@@ -1,12 +1,16 @@
-import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { useContext, useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { MdEuro } from "react-icons/md";
-import { ToastContainer } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
+import { AuthContext } from "../context/ContextProvider";
+import Loader from "../components/Loader";
 
 
 
 const Shop = () => {
+    const { user, setLoading, loading, dispatch, cart } = useContext(AuthContext);
     const [products, setProducts] = useState([]);
+    const navigate = useNavigate();
 
     // Fetching data from product.json
     useEffect(() => {
@@ -16,12 +20,25 @@ const Shop = () => {
             .catch((error) => console.error('Error fetching data:', error));
     }, []);
 
+    // Add to cart system
+    const addToCart = (product) => {
+        setLoading(true);
+        if (user) {
+            dispatch({ type: "Add", product });
+            toast.success("Added to cart successfully!");
+        } else {
+            navigate("/user/login", { state: { from: "/" }, replace: true });
+        }
+        setLoading(false);
+    };
 
-    console.log(products);
 
 
     return (
         <>
+            {
+                loading && <Loader />
+            }
             <ToastContainer />
             <div className="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8">
                 <div className="flex flex-col md:flex-row space-x-10 my-6 w-full">
@@ -86,9 +103,9 @@ const Shop = () => {
                                             <p>{product.short_description}</p>
                                         </div>
                                         <div className="flex items-center justify-between">
-                                            <a href="#" className="text-white bg-gray-900 hover:bg-gray-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded text-sm px-5 py-2.5 text-center w-full">
+                                            <button onClick={() => addToCart(product)} className="text-white bg-gray-900 hover:bg-gray-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded text-sm px-5 py-2.5 text-center w-full">
                                                 Add to cart
-                                            </a>
+                                            </button>
                                         </div>
                                     </div>
                                 </div>

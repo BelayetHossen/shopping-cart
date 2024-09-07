@@ -1,5 +1,5 @@
 
-import { createContext, useContext, useEffect, useRef, useState } from "react";
+import { createContext, useContext, useEffect, useReducer, useRef, useState } from "react";
 import app from "../firebase/firebase.config";
 import {
     GoogleAuthProvider,
@@ -12,8 +12,14 @@ import {
     updateProfile,
 } from "firebase/auth";
 import { toast } from "react-toastify";
+import CartReducer from "../featurs/CartReducer";
 export const AuthContext = createContext();
 const auth = getAuth(app);
+
+
+
+
+
 
 const ContextProvider = ({ children }) => {
     const [user, setUser] = useState(null);
@@ -60,7 +66,7 @@ const ContextProvider = ({ children }) => {
 
         timeoutRef.current = setTimeout(() => {
             logOut();
-        }, 60000); // 60 s
+        }, 6000000); // 60 s
     };
 
     useEffect(() => {
@@ -96,6 +102,18 @@ const ContextProvider = ({ children }) => {
         };
     }, []);
 
+
+
+    //Add to cart system
+    const [cart, dispatch] = useReducer(CartReducer, []);
+
+
+
+
+
+
+
+
     const authInfo = {
         auth,
         user,
@@ -106,6 +124,8 @@ const ContextProvider = ({ children }) => {
         logOut,
         loginEmailPassword,
         googleSignIn,
+        cart,
+        dispatch
     };
 
     return (
